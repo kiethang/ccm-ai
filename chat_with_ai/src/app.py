@@ -1,5 +1,3 @@
-import streamlit as st
-import os
 from dotenv import load_dotenv
 from langchain_core.messages import AIMessage, HumanMessage
 from langchain_core.prompts import ChatPromptTemplate
@@ -7,7 +5,9 @@ from langchain_core.runnables import RunnablePassthrough
 from langchain_community.utilities import SQLDatabase
 from langchain_core.output_parsers import StrOutputParser
 from langchain_openai import AzureChatOpenAI
-
+import streamlit as st
+import os
+import pymysql
 
 # Load environment variables first
 load_dotenv()
@@ -27,8 +27,9 @@ if "chat_history" not in st.session_state:
         AIMessage(content="Hello! I'm a SQL assistant. Ask me anything about your database."),
     ]
 
+# Initialize the database connection with PyMySQL
 def init_database(user: str, password: str, host: str, port: str, database: str) -> SQLDatabase:
-    db_uri = f"mysql+mysqlconnector://{user}:{password}@{host}:{port}/{database}"
+    db_uri = f"mysql+pymysql://{user}:{password}@{host}:{port}/{database}"
     return SQLDatabase.from_uri(db_uri)
 
 def get_llm():
@@ -122,7 +123,7 @@ with st.sidebar:
     st.text_input("Port", value="3306", key="Port")
     st.text_input("User", value="root", key="User")
     st.text_input("Password", type="password", value="admin", key="Password")
-    st.text_input("Database", value="Chinook", key="Database")
+    st.text_input("Database", value="Cost_Central_Monitor", key="Database")
 
     if st.button("Connect"):
         with st.spinner("Connecting to database..."):
