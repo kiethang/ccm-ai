@@ -119,11 +119,11 @@ with st.sidebar:
     st.subheader("Settings")
     st.write("This is a simple chat application using MySQL. Connect to the database and start chatting.")
 
-    st.text_input("Host", value="localhost", key="Host")
+    st.text_input("Host", value="sql12.freesqldatabase.com", key="Host")
     st.text_input("Port", value="3306", key="Port")
-    st.text_input("User", value="root", key="User")
-    st.text_input("Password", type="password", value="admin", key="Password")
-    st.text_input("Database", value="Cost_Central_Monitor", key="Database")
+    st.text_input("User", value="sql12754261", key="User")
+    st.text_input("Password", type="password", value="pDdJqzFl3b", key="Password")
+    st.text_input("Database", value="sql12754261", key="Database")
 
     if st.button("Connect"):
         with st.spinner("Connecting to database..."):
